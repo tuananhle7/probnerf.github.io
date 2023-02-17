@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>ProbNeRF</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--    <meta property="og:image" content="https://probnerf.github.io/img/titlecard.jpg">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630"> -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://probnerf.github.io">
+    <meta property="og:title" content="ProbNeRF: Uncertainty-Aware Inference of 3D Shapes from 2D Images">
+    <meta property="og:description" content="The problem of inferring object shape from a single 2D image is underconstrained. Prior knowledge about what objects are plausible can help, but even given such prior knowledge there may still be uncertainty about the shapes of occluded parts of objects. Recently, conditional neural radiance field (NeRF) models have been developed that can learn to infer good point estimates of 3D models from single 2D images. The problem of inferring uncertainty estimates for these models has received less attention. In this work, we propose probabilistic NeRF (ProbNeRF), a model and inference strategy for learning probabilistic generative models of 3D objects' shapes and appearances, and for doing posterior inference to recover those properties from 2D images. ProbNeRF is trained as a variational autoencoder, but at test time we use Hamiltonian Monte Carlo (HMC) for inference. Given one or a few 2D images of an object (which may be partially occluded), ProbNeRF is able not only to accurately model the parts it sees, but also to propose realistic and diverse hypotheses about the parts it does not see. We show that key to the success of ProbNeRF are (i) a deterministic rendering scheme, (ii) an annealed-HMC strategy, (iii) a hypernetwork-based decoder architecture, and (iv) doing inference over a full set of NeRF weights, rather than just a low-dimensional code.">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ProbNeRF: Uncertainty-Aware Inference of 3D Shapes from 2D Images">
+    <meta name="twitter:description" content="The problem of inferring object shape from a single 2D image is underconstrained. Prior knowledge about what objects are plausible can help, but even given such prior knowledge there may still be uncertainty about the shapes of occluded parts of objects. Recently, conditional neural radiance field (NeRF) models have been developed that can learn to infer good point estimates of 3D models from single 2D images. The problem of inferring uncertainty estimates for these models has received less attention. In this work, we propose probabilistic NeRF (ProbNeRF), a model and inference strategy for learning probabilistic generative models of 3D objects' shapes and appearances, and for doing posterior inference to recover those properties from 2D images. ProbNeRF is trained as a variational autoencoder, but at test time we use Hamiltonian Monte Carlo (HMC) for inference. Given one or a few 2D images of an object (which may be partially occluded), ProbNeRF is able not only to accurately model the parts it sees, but also to propose realistic and diverse hypotheses about the parts it does not see. We show that key to the success of ProbNeRF are (i) a deterministic rendering scheme, (ii) an annealed-HMC strategy, (iii) a hypernetwork-based decoder architecture, and (iv) doing inference over a full set of NeRF weights, rather than just a low-dimensional code.">
+<!--    <meta name="twitter:image" content="https://dorverbin.github.io/refnerf/img/refnerf_titlecard.jpg"> -->
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>ProbNeRF</b>: Uncertainty-Aware Inference <br> of 3D Shapes from 2D Images<br>
+                <small>
+                    AISTATS 2023 (Poster)
+                </small>
+            </h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                        <li>
+                            <a style="text-decoration:none" href="http://matthewdhoffman.com/">
+                              Matthew D. Hoffman
+                            </a>
+                            <br>Google Research
+                        </li>
+                        <li>
+                            <a style="text-decoration:none" href="https://www.tuananhle.co.uk/">
+                              Tuan Anh Le
+                            </a>
+                            <br>Google Research
+                        </li>
+                        <li>
+                            <a style="text-decoration:none" href="">
+                              Pavel Sountsov
+                            </a>
+                            <br>Google Research
+                        </li>
+                        <li>
+                            <a style="text-decoration:none" href="">
+                                Christopher Suter
+                            </a>
+                            <br>Google Research
+                        </li>
+                        <li>
+                            <a style="text-decoration:none" href="">
+                              Ben Lee
+                            </a>
+                            <br>Google Research
+                        </li>
+                        <li>
+                            <a style="text-decoration:none" href="https://pratulsrinivasan.github.io/">
+                              Vikash K. Mansinghka
+                            </a>
+                            <br>MIT / Google Research
+                        </li>
+                        <li>
+                            <a style="text-decoration:none" href="">
+                              Rif A. Saurous
+                            </a>
+                            <br>Google Research
+                        </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="https://arxiv.org/abs/2210.17415">
+                            <img src="./img/paper.png" height="60px">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" target="_blank">
+                            <image src="img/real_database_icon.png" height="60px">
+                                <h4><strong>Dataset</strong></h4>
+                            </a>
+                        </li>                            
+                        <li>
+                            <a href="" target="_blank">
+                            <image src="img/Google_Colaboratory_SVG_Logo.svg" height="60px">
+                                <h4><strong>Colab</strong></h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+The problem of inferring object shape from a single 2D image is underconstrained. Prior knowledge about what objects are plausible can help, but even given such prior knowledge there may still be uncertainty about the shapes of occluded parts of objects. Recently, conditional neural radiance field (NeRF) models have been developed that can learn to infer good point estimates of 3D models from single 2D images. The problem of inferring uncertainty estimates for these models has received less attention. In this work, we propose probabilistic NeRF (ProbNeRF), a model and inference strategy for learning probabilistic generative models of 3D objects' shapes and appearances, and for doing posterior inference to recover those properties from 2D images. ProbNeRF is trained as a variational autoencoder, but at test time we use Hamiltonian Monte Carlo (HMC) for inference. Given one or a few 2D images of an object (which may be partially occluded), ProbNeRF is able not only to accurately model the parts it sees, but also to propose realistic and diverse hypotheses about the parts it does not see. We show that key to the success of ProbNeRF are (i) a deterministic rendering scheme, (ii) an annealed-HMC strategy, (iii) a hypernetwork-based decoder architecture, and (iv) doing inference over a full set of NeRF weights, rather than just a low-dimensional code.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Samples
+                </h3>
+                <div class="text-center">
+                    <img class="img-responsive" alt="samples" src="img/ghum_and_srncars_fullview_grey_samples_and_variance_alemi_version.png">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Architecture
+                </h3>
+                <div class="text-center">
+                    <img class="img-responsive" alt="architecture" src="img/prob_nerf_fin.png">
+                </div>
+            </div>
+        </div>
+            
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                    <pre>
+@article{hoffman2023probnerf,
+    title={ProbNeRF: Uncertainty-Aware Inference of 3D Shapes from 2D Images},
+    author={Matthew D. Hoffman and Tuan Anh Le and Pavel Sountsov and Christopher Suter and Ben Lee and Vikash K. Mansinghka and Rif A. Saurous},
+    journal={AISTATS},
+    year={2023}
+}</pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+             
+                    <br>
+                The website template was borrowed from <a href="https://jonbarron.info/mipnerf360/">Mip-NeRF360</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+</body></html>
