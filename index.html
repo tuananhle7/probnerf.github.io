@@ -76,7 +76,7 @@
                             <br>Google Research
                         </li>
                         <li>
-                            <a style="text-decoration:none" href="https://pratulsrinivasan.github.io/">
+                            <a style="text-decoration:none" href="http://probcomp.csail.mit.edu/principal-investigator/">
                               Vikash K. Mansinghka
                             </a>
                             <br>MIT / Google Research
@@ -132,9 +132,13 @@ The problem of inferring object shape from a single 2D image is underconstrained
                 <h3>
                     Samples
                 </h3>
-                <div class="text-center">
-                    <img class="img-responsive" alt="samples" src="img/ghum_and_srncars_fullview_grey_samples_and_variance_alemi_version.png">
-                </div>
+Depicted below are some HMC and VI posterior samples from the GHUM and SRN cars datasets:
+            </div>
+            <div class="col-md-10 col-md-offset-1">
+                <img alt="samples" src="img/ghum_and_srncars_fullview_grey_samples_and_variance_alemi_version.png">
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+Conditioned on either the left half a view of a GHUM body (top left) or a back view of an SRN car (1st column, 4th row), HMC produces samples (columns 2–4) that are realistic, consistent with the conditioned-on view, and diverse as shown by the per-pixel variance (column 5). VI produces realistic and consistent samples (columns 6–8), but they have almost no diversity (last column). Renderings from novel views (rows 2–3/5–6) highlight the diversity of the HMC samples, in e.g. the poses of the left arm and the left leg or the variation of the car’s shape, spoiler and color.
             </div>
         </div>
 
@@ -143,9 +147,9 @@ The problem of inferring object shape from a single 2D image is underconstrained
                 <h3>
                     Architecture
                 </h3>
-                <div class="text-center">
-                    <img class="img-responsive" alt="architecture" src="img/prob_nerf_fin.png">
-                </div>
+            </div>
+            <div class="col-md-10 col-md-offset-1">
+                <img class="img-responsive" alt="architecture" src="img/prob_nerf_fin.png">
             </div>
         </div>
             
